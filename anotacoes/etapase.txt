@@ -1,0 +1,3 @@
+Para copiar o caminho das pastas, o programa nao precisa nem olhar para o servidor, ele usa as proprias informacoes na planilha e cria o caminho no mac do usuario tudo certinho.
+
+Para copiar os arquivos vamos precisar buscar no servidor ref por ref.hromec

@@ -57,10 +57,10 @@ def criaCaminho(referencia):
         referencias.append(refs)
     # print(referencias)
     # Defino o prefixo do caminho do User
-    prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'.split('\\')
+    prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'
     # Junta para o caminho do User, e Cria os caminhos
     for refs in referencias:
-        caminho = os.path.join('\\'.join(prefixUser), today, refs)
+        caminho = os.path.join(prefixUser, today, refs)
         # print(caminho)
         if not os.path.exists(caminho):
             os.makedirs(caminho)

@@ -45,7 +45,7 @@ drop_button = Button(container3, text='Jogar', font=('Arial', '9', 'bold'), bord
                      fg='#353535')
 drop_button.pack(side=LEFT)
 
-feedback = Label(container4, text='Testando a Fonte', font=('Arial', '11', 'bold'), fg='#353535')
+feedback = Label(container4, text='', font=('Arial', '11', 'bold'), fg='#353535')
 feedback.pack()
 
 janela.mainloop()

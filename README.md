@@ -1,2 +1,2 @@
 # SysIcomm
-System create to automatize some tasks
+System created to automatize some tasks

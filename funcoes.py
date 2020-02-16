@@ -2,19 +2,24 @@ import os
 import shutil
 from datetime import date
 
+hoje = date.today().strftime("%Y-%m-%d")
+today = f'Data - {hoje}'
+
+prefixOriS2G = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\S2G\\Originais'.split('\\')
+prefixOriOQV = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\Icommgroup\\OQV\\Originais'.split(
+    '\\')
+prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'.split('\\')
+# print(prefixUser)
+prefixUserS2G = prefixUser + [today] + ['S2G']
+prefixUserOQV = prefixUser + [today] + ['OQV']
+
+# print(prefixUserS2G)
+# print(prefixUserOQV)
+
+
 def copiaRefs(referencia):
 
-    hoje = date.today().strftime("%Y-%m-%d")
-    today = f'Data - {hoje}'
 
-    prefixOriS2G = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\S2G\\Originais'.split('\\')
-    prefixOriOQV = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\Icommgroup\\OQV\\Originais'.split('\\')
-    prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'.split('\\')
-    # print(prefixUser)
-    prefixUserS2G = prefixUser + [today] + ['S2G']
-    prefixUserOQV = prefixUser + [today] + ['OQV']
-    # print(prefixUserS2G)
-    # print(prefixUserOQV)
     try:
         for refs in referencia:
             if refs[0] == 'S2G':

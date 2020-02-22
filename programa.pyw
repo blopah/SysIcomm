@@ -5,14 +5,14 @@ from tkinter import *
 def take():
     feedback['text'] = 'Pegando...'
     secao = text_area.get()
-    funcoes.criaCaminho(funcoes.listaCaminho(secao))
-    feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao))
-    # feedback['text'] = 'Tarefa finalizada'
-
+    funcoes.criaCaminho(funcoes.listaCaminho(secao), 't')
+    feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 't')
 
 def drop():
-    feedback['text'] = 'Droping!'
-
+    feedback['text'] = 'Jogando...'
+    secao = text_area.get()
+    funcoes.criaCaminho(funcoes.listaCaminho(secao), 'd')
+    feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 'd')
 
 janela = Tk()
 janela.geometry('530x110')

@@ -150,10 +150,10 @@ def listaCaminho(secao):
         print('IndexError')
     return 'IndexError'
 
-sec = '''VERAO 20	ADIDAS	2020	157ART12Verde	MODELO E STILL	OQV
-Inverno 20	nike	8098	bshabs4absh	MODELO E STILL	OQV'''
+# sec = '''VERAO 20	ADIDAS	2020	157ART12Verde	MODELO E STILL	OQV
+# Inverno 20	nike	8098	bshabs4absh	MODELO E STILL	OQV'''
 
-criaCaminho(listaCaminho(sec), 'd')
-copiaRefs(listaCaminho(sec), 'd')
+# criaCaminho(listaCaminho(sec), 'd')
+# copiaRefs(listaCaminho(sec), 'd')
 # mapeiaPastas()
 # Testee

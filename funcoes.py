@@ -156,4 +156,4 @@ Inverno 20	nike	8098	bshabs4absh	MODELO E STILL	OQV'''
 criaCaminho(listaCaminho(sec), 'd')
 copiaRefs(listaCaminho(sec), 'd')
 # mapeiaPastas()
-# Teste
+# Testee

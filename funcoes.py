@@ -6,18 +6,22 @@ hoje = date.today().strftime("%Y-%m-%d")
 today = f'Data - {hoje}'
 
 prefixOriS2G = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\S2G\\Originais'.split('\\')
-prefixOriOQV = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\Icommgroup\\OQV\\Originais'.split(
-    '\\')
+prefixOriOQV = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\Icommgroup\\OQV\\Originais'.split('\\')
+prefixTraS2G = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\S2G\\Tratadas'.split('\\')
+prefixTraOQV = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Servidor\\Icommgroup\\OQV\\Tratadas'.split('\\')
 prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'.split('\\')
-# print(prefixUser)
 prefixUserS2G = prefixUser + [today] + ['S2G']
 prefixUserOQV = prefixUser + [today] + ['OQV']
 
 # print(prefixUserS2G)
 # print(prefixUserOQV)
+# print(prefixOriS2G)
+# print(prefixOriOQV)
+# print(prefixTraS2G)
+# print(prefixTraOQV)
 
 
-def copiaRefs(referencia):
+def copiaRefs(referencia, t_d):
 
 
     try:
@@ -48,27 +52,37 @@ def copiaRefs(referencia):
         return 'Caminho ja existente no seu Mac'
 
 
-def criaCaminho(referencia):
+def criaCaminho(referencia, t_d):
     if referencia == 'IndexError':
         return 'Nao foi possível interpretar o caminho inserido.'
-    # Pega a data de hoje
-    hoje = date.today().strftime("%Y-%m-%d")
-    today = f'Data - {hoje}'
-    # print(today)
+
     # Converte a lista do caminho em um caminho
     referencias = list()
     for refes in referencia:
         refs = '\\'.join(refes[:-1])
         referencias.append(refs)
     # print(referencias)
-    # Defino o prefixo do caminho do User
-    prefixUser = 'C:\\Users\\Pablo\\Documents\\SandBox\\Sandbox Sys Icomm\\Usuario\\Pablo Lucena'
     # Junta para o caminho do User, e Cria os caminhos
-    for refs in referencias:
-        caminho = os.path.join(prefixUser, today, refs)
-        # print(caminho)
-        if not os.path.exists(caminho):
-            os.makedirs(caminho)
+    if t_d == 't':
+        for refs in referencias:
+            caminho = os.path.join('\\'.join(prefixUser), today, refs)
+            # print(caminho)
+            if not os.path.exists(caminho):
+                os.makedirs(caminho)
+    elif t_d == 'd':
+        # print(t_d)
+        for refs in referencias:
+            # print(refs[:3])
+            if refs[:3] == 'S2G':
+                caminho = os.path.join('\\'.join(prefixTraS2G), refs[4:])
+                # print(caminho)
+                if not os.path.exists(caminho):
+                    os.makedirs(caminho)
+            elif refs[:3] == 'OQV':
+                caminho = os.path.join('\\'.join(prefixTraOQV), refs[4:])
+                # print(caminho)
+                if not os.path.exists(caminho):
+                    os.makedirs(caminho)
 
 
 def listaCaminho(secao):
@@ -91,18 +105,16 @@ def listaCaminho(secao):
             # print(f'{ref[:5]}')
             referencias.append(ref[:5])
         # print('-' * 40)
-        print(referencias)
+        # print(referencias)
         return referencias
     except IndexError:
         print('IndexError')
     return 'IndexError'
 
+sec = '''VERAO 20	ADIDAS	2020	157ART12Verde	MODELO E STILL	OQV
+Inverno 20	nike	8098	bshabshabsh	MODELO E STILL	OQV'''
 
-# criaPastas()
-# copiaPath()
-# for ref in listaCaminho():
-#     print(ref)
-# criaCaminho(listaCaminho())
-# copiaRefs(listaCaminho())
+criaCaminho(listaCaminho(sec), 'd')
+copiaRefs(listaCaminho(sec), 'd')
 # mapeiaPastas()
 # Teste

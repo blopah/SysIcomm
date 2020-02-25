@@ -3,26 +3,24 @@ from tkinter import *
 
 
 def take():
-    feedback['text'] = 'Pegando...'
     secao = text_area.get()
     if funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[1]:
-        print(funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0])
+        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0]
         funcoes.criaCaminho(funcoes.listaCaminho(secao), 't')
         feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 't')
 
     else:
-        print(funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0])
+        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0]
 
 
 def drop():
-    feedback['text'] = 'Jogando...'
     secao = text_area.get()
     if funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[1]:
-        print(funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0])
+        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0]
         funcoes.criaCaminho(funcoes.listaCaminho(secao), 'd')
         feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 'd')
     else:
-        print(funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0])
+        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0]
 
 
 janela = Tk()

@@ -35,6 +35,7 @@ def checkpaths(referencia, t_d):
 
         #Checa os caminhos completos, e os nao encontrados guarda em uma lista
         list_of_not_found_srcs = list()
+        list_of_not_found_srcs_txt = ''
         for refs in referencia:
             if refs[0] == 'S2G':
                 if not validPrefixOriS2G:
@@ -50,9 +51,12 @@ def checkpaths(referencia, t_d):
                 del refs[0]
                 srcPath = '\\'.join(prefixOriOQV + refs)
                 if not os.path.exists(srcPath):
-                    list_of_not_found_srcs.append(srcPath)
+                    list_of_not_found_srcs.append(f'\n {srcPath}')
+        for listItems in list_of_not_found_srcs:
+            list_of_not_found_srcs_txt += listItems
+            print(list_of_not_found_srcs_txt)
         if not len(list_of_not_found_srcs) == 0:
-            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs), False)
+            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs_txt), False)
         return ('Todos os caminhos das pastas foram encontrados.', True)
     elif t_d == 'd':
         # Checar caminhos do usuario
@@ -68,6 +72,7 @@ def checkpaths(referencia, t_d):
 
         # Checa os caminhos completos, e os nao encontrados guarda em uma lista
         list_of_not_found_srcs = list()
+        list_of_not_found_srcs_txt = ''
         for refs in referencia:
             if refs[0] == 'S2G':
                 if not validPrefixUserS2G:
@@ -83,17 +88,26 @@ def checkpaths(referencia, t_d):
                 del refs[0]
                 srcPath = '\\'.join(prefixUserOQV + refs)
                 if not os.path.exists(srcPath):
-                    list_of_not_found_srcs.append(srcPath)
+                    list_of_not_found_srcs.append(f'\n {srcPath}')
+        for listItems in list_of_not_found_srcs:
+            list_of_not_found_srcs_txt += listItems
+            print(list_of_not_found_srcs_txt)
         if not len(list_of_not_found_srcs) == 0:
-            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs), False)
+            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs_txt), False)
         return ('Todos os caminhos das pastas foram encontrados.', True)
 
 
 def copiaRefs(referencia, t_d):
 
     if t_d == 't':
-        try:
-            for refs in referencia:
+        list_of_not_found_srcs = list()
+        list_of_not_found_dsts = list()
+        list_of_not_found_srcs_txt = ''
+        list_of_not_found_dsts_txt = ''
+        for refs in referencia:
+            srcPath = ''
+            dstPath = ''
+            try:
                 if refs[0] == 'S2G':
                     del refs[0]
                     srcPath = '\\'.join(prefixOriS2G + refs)
@@ -111,20 +125,39 @@ def copiaRefs(referencia, t_d):
                     # print(f' dstPath {dstPath}')
                     # print(f' srcPath {srcPath}')
                 else:
-                    print('Nao foi possível interpretar o caminho inserido.')
-                    return 'Nao foi possível interpretar o caminho inserido.'
-            return 'Tarefa Finalizada'
-        except FileNotFoundError:
-            print('Caminho não encontrado no servidor')
-            return 'Caminho não encontrado no servidor'
-        except FileExistsError:
-            print('Caminho ja existente no seu Mac')
-            return 'Caminho ja existente no seu Mac'
+                    print('Nao foi possível interpretar se o caminho é para S2G ou OQV')
+                    return 'Nao foi possível interpretar se o caminho é para S2G ou OQV.'
+            except FileNotFoundError:
+                list_of_not_found_srcs.append(f'\n {srcPath}')
+                continue
+            except FileExistsError:
+                list_of_not_found_dsts.append(f'\n {dstPath}')
+                continue
+        for listItems in list_of_not_found_srcs:
+            list_of_not_found_srcs_txt += listItems
+            print(list_of_not_found_srcs_txt)
+        for listItems in list_of_not_found_dsts:
+            list_of_not_found_dsts_txt += listItems
+            print(list_of_not_found_dsts_txt)
+        if len(list_of_not_found_srcs) == 0 and len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada0\n'
+        elif not len(list_of_not_found_srcs) == 0 and not len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada1 \nCaminhos não encontrados no servidor: {} \nCaminho ja existente no seu Mac: \n {}'.format(list_of_not_found_srcs_txt, list_of_not_found_dsts_txt)
+        elif not len(list_of_not_found_srcs) == 0:
+            return 'Tarefa Finalizada2 \nCaminhos não encontrados no servidor: \n {}'.format(list_of_not_found_srcs_txt)
+        elif not len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada3 \nCaminhos ja existentes no seu Mac: \n {}'.format(list_of_not_found_dsts_txt)
+
+
     elif t_d == 'd':
-        # print('t_d = d')
-        # print(f'{referencia}')
-        try:
-            for refs in referencia:
+        list_of_not_found_srcs = list()
+        list_of_not_found_dsts = list()
+        list_of_not_found_srcs_txt = ''
+        list_of_not_found_dsts_txt = ''
+        for refs in referencia:
+            srcPath = ''
+            dstPath = ''
+            try:
                 if refs[0] == 'S2G':
                     del refs[0]
                     srcPath = '\\'.join(prefixUserS2G + refs)
@@ -142,15 +175,28 @@ def copiaRefs(referencia, t_d):
                     # print(f' dstPath {dstPath}')
                     # print(f' srcPath {srcPath}')
                 else:
-                    print('Nao foi possível interpretar o caminho inserido.')
-                    return 'Nao foi possível interpretar o caminho inserido.'
-            return 'Tarefa Finalizada'
-        except FileNotFoundError:
-            print('Caminho não encontrado no seu Mac')
-            return 'Caminho não encontrado no seu Mac'
-        except FileExistsError:
-            print('Caminho ja existente no servidor')
-            return 'Caminho ja existente no servidor'
+                    print('Nao foi possível interpretar se o caminho é para S2G ou OQV.')
+                    return 'Nao foi possível interpretar se o caminho é para S2G ou OQV.'
+            except FileNotFoundError:
+                list_of_not_found_srcs.append(f'\n {srcPath}')
+                continue
+            except FileExistsError:
+                list_of_not_found_dsts.append(f'\n {dstPath}')
+                continue
+        for listItems in list_of_not_found_srcs:
+            list_of_not_found_srcs_txt += listItems
+            print(list_of_not_found_srcs_txt)
+        for listItems in list_of_not_found_dsts:
+            list_of_not_found_dsts_txt += listItems
+            print(list_of_not_found_dsts_txt)
+        if len(list_of_not_found_srcs) == 0 and len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada0\n'
+        elif not len(list_of_not_found_srcs) == 0 and not len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada1 \nCaminhos não encontrados no seu Mac: {} \nCaminho ja existente no servidor: \n {}'.format(list_of_not_found_srcs_txt, list_of_not_found_dsts_txt)
+        elif not len(list_of_not_found_srcs) == 0:
+            return 'Tarefa Finalizada2 \nCaminhos não encontrados no seu Mac: \n {}'.format(list_of_not_found_srcs_txt)
+        elif not len(list_of_not_found_dsts) == 0:
+            return 'Tarefa Finalizada3 \nCaminhos ja existentes no servidor: \n {}'.format(list_of_not_found_dsts_txt)
 
 
 def criaCaminho(referencia, t_d):

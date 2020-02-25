@@ -20,6 +20,74 @@ prefixUserOQV = prefixUser + [today] + ['OQV']
 # print(prefixTraS2G)
 # print(prefixTraOQV)
 
+def checkpaths(referencia, t_d):
+    if t_d == 't':
+        #Checar caminhos da pasta originais do servidor
+        #Checa todos os prefixos originais
+        if os.path.exists('\\'.join(prefixOriOQV)):
+            validPrefixOriOQV = True
+        else:
+            validPrefixOriOQV = False
+        if os.path.exists('\\'.join(prefixOriS2G)):
+            validPrefixOriS2G = True
+        else:
+            validPrefixOriS2G = False
+
+        #Checa os caminhos completos, e os nao encontrados guarda em uma lista
+        list_of_not_found_srcs = list()
+        for refs in referencia:
+            if refs[0] == 'S2G':
+                if not validPrefixOriS2G:
+                    return ('O caminho para a pasta originais da S2G não existe', False)
+                del refs[0]
+                srcPath = '\\'.join(prefixOriS2G + refs)
+                if not os.path.exists(srcPath):
+                    list_of_not_found_srcs.append(srcPath)
+
+            elif refs[0] == 'OQV':
+                if not validPrefixOriOQV:
+                    return ('O caminho para a pasta originais da OQV não existe', False)
+                del refs[0]
+                srcPath = '\\'.join(prefixOriOQV + refs)
+                if not os.path.exists(srcPath):
+                    list_of_not_found_srcs.append(srcPath)
+        if not len(list_of_not_found_srcs) == 0:
+            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs), False)
+        return ('Todos os caminhos das pastas foram encontrados.', True)
+    elif t_d == 'd':
+        # Checar caminhos do usuario
+        # Checa todos os prefixos do usuario
+        if os.path.exists('\\'.join(prefixUserOQV)):
+            validPrefixUserOQV = True
+        else:
+            validPrefixUserOQV = False
+        if os.path.exists('\\'.join(prefixUserS2G)):
+            validPrefixUserS2G = True
+        else:
+            validPrefixUserS2G = False
+
+        # Checa os caminhos completos, e os nao encontrados guarda em uma lista
+        list_of_not_found_srcs = list()
+        for refs in referencia:
+            if refs[0] == 'S2G':
+                if not validPrefixUserS2G:
+                    return ('O caminho para a pasta do usuario da S2G não existe', False)
+                del refs[0]
+                srcPath = '\\'.join(prefixUserS2G + refs)
+                if not os.path.exists(srcPath):
+                    list_of_not_found_srcs.append(srcPath)
+
+            elif refs[0] == 'OQV':
+                if not validPrefixUserOQV:
+                    return ('O caminho para a pasta do usuario da OQV não existe', False)
+                del refs[0]
+                srcPath = '\\'.join(prefixUserOQV + refs)
+                if not os.path.exists(srcPath):
+                    list_of_not_found_srcs.append(srcPath)
+        if not len(list_of_not_found_srcs) == 0:
+            return ('Não foram enconstradas as seguintes pastas: \n{}'.format(list_of_not_found_srcs), False)
+        return ('Todos os caminhos das pastas foram encontrados.', True)
+
 
 def copiaRefs(referencia, t_d):
 
@@ -152,6 +220,8 @@ def listaCaminho(secao):
 
 # sec = '''VERAO 20	ADIDAS	2020	157ART12Verde	MODELO E STILL	OQV
 # Inverno 20	nike	8098	bshabs4absh	MODELO E STILL	OQV'''
+
+# print(checkpaths(listaCaminho(sec), 't'))
 
 # criaCaminho(listaCaminho(sec), 'd')
 # copiaRefs(listaCaminho(sec), 'd')

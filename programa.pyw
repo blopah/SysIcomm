@@ -4,23 +4,23 @@ from tkinter import *
 
 def take():
     secao = text_area.get()
-    if funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[1]:
-        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0]
-        funcoes.criaCaminho(funcoes.listaCaminho(secao), 't')
-        feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 't')
+    if funcoes.check_paths(funcoes.list_way(secao), 't')[1]:
+        feedback['text'] = funcoes.check_paths(funcoes.list_way(secao), 't')[0]
+        funcoes.creates_paths(funcoes.list_way(secao), 't')
+        feedback['text'] = funcoes.copy_refs(funcoes.list_way(secao), 't')
 
     else:
-        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 't')[0]
+        feedback['text'] = funcoes.check_paths(funcoes.list_way(secao), 't')[0]
 
 
 def drop():
     secao = text_area.get()
-    if funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[1]:
-        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0]
-        funcoes.criaCaminho(funcoes.listaCaminho(secao), 'd')
-        feedback['text'] = funcoes.copiaRefs(funcoes.listaCaminho(secao), 'd')
+    if funcoes.check_paths(funcoes.list_way(secao), 'd')[1]:
+        feedback['text'] = funcoes.check_paths(funcoes.list_way(secao), 'd')[0]
+        funcoes.creates_paths(funcoes.list_way(secao), 'd')
+        feedback['text'] = funcoes.copy_refs(funcoes.list_way(secao), 'd')
     else:
-        feedback['text'] = funcoes.checkpaths(funcoes.listaCaminho(secao), 'd')[0]
+        feedback['text'] = funcoes.check_paths(funcoes.list_way(secao), 'd')[0]
 
 
 janela = Tk()
